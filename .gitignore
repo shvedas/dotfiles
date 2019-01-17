@@ -1,0 +1,10 @@
+# OS-specific temporary files
+Thumbs.db
+.DS_Store
+
+# Code editorsgit
+.vscode/
+.idea/
+
+Brewfile.backup
+Brewfile.1
