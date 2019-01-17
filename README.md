@@ -4,7 +4,7 @@ This repos are some configuration files of my environment, such as Vim, Zsh, and
 
 ## Install these files
 ```sh
-cd; curl -#L https://github.com/shvedas/dotfiles/master | tar -xzv --strip-components 1 --exclude=README.md
+cd; curl -#L https://github.com/shvedas/dotfiles/tree/master | tar -xzv --strip-components 1 --exclude=README.md
 ```
 
 ## Tools
