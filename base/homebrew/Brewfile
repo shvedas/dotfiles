@@ -1,0 +1,11 @@
+# https://github.com/Homebrew/homebrew-bundle
+tap "caskroom/cask"
+tap "homebrew/cask-versions"
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "homebrew/services"
+
+# Homebrew
+# https://github.com/Homebrew/brew/
+# homebrew-cask
+# https://github.com/caskroom/homebrew-cask

@@ -8,3 +8,5 @@ Thumbs.db
 
 Brewfile.backup
 Brewfile.1
+_backup
+Brewfile.lock.json

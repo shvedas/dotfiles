@@ -1,0 +1,7 @@
+cask "iterm2"
+brew "bash"
+brew "bash-completion"
+brew "zsh"
+brew "zsh-completions"
+brew "tmux"
+brew "neovim"

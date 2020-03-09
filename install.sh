@@ -1,25 +1,19 @@
 #!/bin/bash
-
 # A shell script to automate system tool setup for Mac OS X.
+source "./base/setup.sh"
+# rm -rf "$WORKDIR"
 
-echo "*** Homebrew ***"
-if [ -z `command -v brew` ]; then
-    echo "Installing Homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi;
+echo "$os: Homebrew: tools instaling..."
+brew bundle --file "$(pwd)"/Brewfile
 
-echo "Homebrew: updating..."
-brew update
-brew upgrade
-brew bundle dump --file=Brewfile.backup --force
-
-echo "Homebrew: tools instaling..."
-ln -nfs Brewfile "$HOME"/Brewfile
-brew bundle install
-
-echo "Init NVM..."
+echo "$os: Init NVM..."
 mkdir ~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-echo "Create workspace..."
-mkdir ~/workspace2
+
+# find the installers and run them iteratively
+for installer in $(find . -name "*setup.sh"); do
+    if ! [[ $installer =~ "./base" ]]; then
+        sh -c "${installer}"
+    fi
+done
