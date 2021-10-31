@@ -1,0 +1,26 @@
+---
+  - name: Ensure VSCode is installed.
+    stat:
+      path: /usr/local/bin/code
+    register: code_check
+
+  - name: Install VSCode plugins.
+    become: false
+    shell: "code --install-extension {{item}}"
+    loop:
+      - vscode-icons-team.vscode-icons
+      - anseki.vscode-color
+      - editorconfig.editorconfig
+      - eamodio.gitlens
+      - ms-python.python
+      - ms-vscode.cpptools
+      - slevesque.vscode-hexdump
+      - sensourceinc.vscode-sql-beautify
+      - bierner.markdown-preview-github-styles
+      - arcticicestudio.nord-visual-studio-code
+      - dbaeumer.vscode-eslint
+      - ms-toolsai.jupyter
+      - hediet.vscode-drawio
+      - gruntfuggly.todo-tree
+    when:
+      - code_check.stat.exists

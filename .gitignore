@@ -5,8 +5,10 @@ Thumbs.db
 # Code editorsgit
 .vscode/
 .idea/
+.vagrant
 
 Brewfile.backup
 Brewfile.1
 _backup
 Brewfile.lock.json
+test.md

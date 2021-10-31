@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+
+  vars_files:
+    - config/general.yml
+    - config/homebrew.apps.yml
+
+  # pre_tasks:
+
+  tasks:
+    - include_tasks: tasks/homebrew.yml
+    - include_tasks: tasks/main.yml
+    - include_tasks: tasks/vscode.yml
+    - include_tasks: tasks/console.yml

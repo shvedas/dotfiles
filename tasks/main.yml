@@ -1,0 +1,16 @@
+---
+  - name: Show home directory
+    debug:
+      var: WORKSPACE
+
+  - name: Creates workspace directory
+    file:
+      path: "{{ WORKSPACE }}"
+      state: directory
+    become: false
+
+  - name: Clone my Docker examples repo
+    git:
+      repo: https://github.com/shvedas/docker-examples.git
+      dest: "{{ WORKSPACE }}/docker-examples"
+    become: false

@@ -1,0 +1,61 @@
+---
+brew_packages:
+# ################################ #
+# GENERAL
+# ################################ #
+  # - openssl
+  - telegram
+# ################################ #
+# DEVELOPMENT
+# ################################ #
+  - git
+  - awscli
+  - python
+  - python3
+  - docker-compose
+  - node
+  - nvm
+  - redis
+  - cmake
+  - jmeter
+# ################################ #
+# CONSOLE
+# ################################ #
+  # - jq
+  - tmux
+  - fzf
+  - zsh
+  - zsh-syntax-highlighting
+  - zsh-completions
+  - bash
+  - bash-completion
+  - fish
+  - nvim
+  - htop
+  - telnet
+  - curl
+
+
+brew_cask_packages:
+# ################################ #
+# GENERAL
+# ################################ #
+  - google-chrome
+  - slack
+  # - skype
+# ################################ #
+# DEVELOPMENT
+# ################################ #
+  - visual-studio-code
+  - docker
+  - virtualbox
+  - virtualbox-extension-pack
+  - vmware-fusion
+  - vagrant
+  - vagrant-manager
+# ################################ #
+# CONSOLE
+# ################################ #
+  - iterm2
+  - macvim
+  - docker

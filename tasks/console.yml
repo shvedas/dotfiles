@@ -1,0 +1,99 @@
+---
+  ### ZSH
+  - name: Ensure ZSH is installed.
+    stat:
+      path: /usr/local/bin/zsh
+    register: zsh_check
+
+  - name: Ensure OH-MY-ZSH is installed.
+    stat:
+      path: "{{ HOME }}/.oh-my-zsh"
+    register: oh_my_zsh_check
+
+  - name: Installing OH-MY-ZSH.
+    shell: >
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    become: false
+    when:
+        - zsh_check.stat.exists
+        - not oh_my_zsh_check.stat.exists
+
+  - name: Copy dwmkerr zsh theme.
+    become: false
+    template:
+      src: dwmkerr.zsh-theme
+      dest: "{{ HOME }}/.oh-my-zsh/themes/dwmkerr.zsh-theme"
+    when:
+      - zsh_check.stat.exists
+      - oh_my_zsh_check.stat.exists
+
+  - name: Create .zshrc config file.
+    become: false
+    template:
+      src: zshrc
+      dest: "{{ HOME }}/.zshrc"
+    when:
+      - zsh_check.stat.exists
+      - oh_my_zsh_check.stat.exists
+
+  - name: Switch shell to zsh.
+    shell: >
+      chsh -s "$(which zsh)"
+    when:
+      - zsh_check.stat.exists
+      - oh_my_zsh_check.stat.exists
+
+  ### TMUX
+  - name: Ensure TMUX is installed.
+    stat:
+      path: /usr/local/bin/tmux
+    register: tmux_check
+
+  - name: Update tmux config file.
+    become: false
+    template:
+      src: tmux.conf
+      dest: "{{ HOME }}/.tmux.conf"
+    when:
+      - tmux_check.stat.exists
+
+  - name: Ensure TMUX plugin exists.
+    stat:
+      path: "{{ HOME }}/.tmux/plugins/tpm"
+    register: tmux_tpm_check
+  
+  - name: Clear old TMUX plugins.
+    file:
+      state: absent
+      path: "{{ HOME }}/.tmux/plugins/tpm"
+    when:
+      - tmux_tpm_check.stat
+      
+  - name: Clone new TMUX plugins.
+    become: false
+    git:
+      repo: https://github.com/tmux-plugins/tpm
+      dest: "{{ HOME }}/.tmux/plugins/tpm"
+
+  - name: Run TMUX plugins installation.
+    become: false
+    shell: >
+      ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+  - name: Restart TMUX server
+    become: false
+    shell: >
+      tmux kill-server
+    when:
+      - tmux_check.stat.exists
+    ignore_errors: yes
+
+  - name: Reload TMUX configuration file.
+    become: false
+    shell: >
+      tmux source-file "{{ HOME }}/.tmux.conf"
+    when:
+      - tmux_check.stat.exists
+
+  ### VIM
+  ### Iterm2

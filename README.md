@@ -1,20 +1,8 @@
-# My Dotfiles for macOS
+# Dotfiles for macOS
 
-This repo are some configuration files of my environment, such as Vim, Zsh, and Tmux, etc.
+This repo are some configuration files of my MacOS environment, such as Iterm2, Tmux, Vim and programming environments etc.
 
-## Setup
-Execute following command for installing extensions:
-```bin/sh
-$ curl -#L https://github.com/shvedas/dotfiles.git/tree/master | tar -xzv --strip-components 1 --exclude=README.md
-```
-Or execute following commands:
-```bin/sh
-$ git clone https://github.com/shvedas/dotfiles.git
-$ cd dotfiles
-$ ./install.sh
-```
-
-## Package overview
+### Package overview
 
 * [Oh-My-Zsh][oh-my-zsh]
 * [Homebrew][homebrew]
@@ -22,3 +10,30 @@ $ ./install.sh
 * [Git][git]
 * [Tmux][tmux]
 * [Node.js][nodejs]
+## Prerequisites:
+<!-- XCode Command-Line Tools
+```bin/sh
+xcode-select --install
+``` -->
+[Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+
+## Setup
+Execute following command for installing extensions:
+```bin/sh
+# Install Apple's Command Line Tools
+xcode-select --install
+
+# Install Homebrew (see http://brew.sh)
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install ansible
+brew install ansible
+
+# Clone this repository
+
+# Run the playbook
+ansible-playbook -i ./hosts ./playbook.yml --ask-become-pass
+```
+
+# Inspired by
+- [dwmkerr/dotfiles](https://github.com/dwmkerr/dotfiles)

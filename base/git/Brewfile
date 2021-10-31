@@ -1,4 +1,0 @@
-brew "git"
-brew "git-flow-avh"
-brew "git-quick-stats"
-brew "diff-so-fancy"

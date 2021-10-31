@@ -1,0 +1,38 @@
+---
+  - name: Ensure Homebrew is installed.
+    stat:
+      path: /usr/local/bin/brew
+    register: homebrew_check
+
+  - name: Ensure that homebrew is installed with the script method
+    shell: >
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      creates=/usr/local/Cellar
+    when:
+      - ansible_os_family == 'Darwin'
+      - not homebrew_check.stat.exists
+
+  - name: Updating Homebrew
+    homebrew:
+      update_homebrew: true
+    when: homebrew_check.stat.exists
+    become: false
+
+  - name: Installing Homebrew Cask Packages
+    homebrew_cask:
+      name: "{{ brew_cask_packages }}"
+      state: present
+      accept_external_apps: true
+    register: result
+    until: result is successful
+    when: homebrew_check.stat.exists
+    become: false
+
+  - name: Installing Homebrew Packages
+    homebrew:
+      name: "{{ brew_packages }}"
+      state: present
+    register: result
+    until: result is successful
+    when: homebrew_check.stat.exists
+    become: false

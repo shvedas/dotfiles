@@ -1,0 +1,21 @@
+---
+HOME: "{{ lookup('env','HOME') }}"
+WORKSPACE: "{{ HOME }}/workspace"
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+ZSH_PLUGINS:
+  - git
+  - osx
+  - docker
+  - docker-compose
+  - vagrant
+  - node
+  - npm
+  - nvm
+  - pip
+  - virtualenv
+  - brew
+  # - zsh-syntax-highlighting
+  # - zsh-autosuggestions
+  - ansible
+  - terraform
+  - tmux
