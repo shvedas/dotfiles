@@ -26,6 +26,7 @@
     register: result
     until: result is successful
     when: homebrew_check.stat.exists
+    ignore_errors: yes
     become: false
 
   - name: Installing Homebrew Packages
@@ -35,4 +36,5 @@
     register: result
     until: result is successful
     when: homebrew_check.stat.exists
+    ignore_errors: yes
     become: false
